@@ -14,3 +14,9 @@ commands.
 `$ vagrant up`
 
 `$ vagrant ssh`
+
+Now you are in the `/vagrant` directory inside the VM and you can follow any
+spark tutorial. Please keep in mind that the `/vagrant` directory inside the VM
+is mapped to the `spark-vagrant` directory on your computer/host.
+
+You can now start the `spark-shell` or execute `scalac` or `sbt`.
