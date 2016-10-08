@@ -74,16 +74,25 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-    yum install -y java
     scala_version="2.11.8"
     spark_version="2.0.0"
     hadoop_version="2.7"
-    wget "http://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.tgz" "http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.7.tgz"
+    sbt_launch_version="0.13.12"
+    wget "http://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.tgz" "http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.7.tgz" "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.12/sbt-launch.jar"
+    yum install -y java
     tar xvf scala-${scala_version}.tgz && rm scala-${scala_version}.tgz
     tar xvf spark-${spark_version}-bin-hadoop${hadoop_version}.tgz && rm spark-${spark_version}-bin-hadoop${hadoop_version}.tgz
-    mkdir -pv /usr/local/scala /usr/local/spark
+    mkdir -pv /usr/local/scala /usr/local/spark /usr/local/sbt-launcher
     mv -v scala-${scala_version} /usr/local/scala
     mv -v spark-${spark_version}-bin-hadoop${hadoop_version} /usr/local/spark
+    mv -v sbt-launch.jar /usr/local/sbt-launcher
+    cat > /usr/bin/sbt << EOF
+#!/bin/bash
+SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
+java $SBT_OPTS -jar /usr/local/sbt-launcher/sbt-launch.jar "$@"
+EOF
+    chmod -v 755 /usr/bin/sbt
+    echo "Setting environment variables"
     echo "export PATH=$PATH:/usr/local/scala/scala-${scala_version}/bin" >> /home/vagrant/.bashrc
     echo "export PATH=$PATH:/usr/local/spark/spark-${spark_version}-bin-hadoop${hadoop_version}/bin" >> /home/vagrant/.bashrc
   SHELL
