@@ -23,3 +23,9 @@ between the host and the VM.
 
 You can now start the `spark-shell` or execute `scalac` or `sbt` and you can
 follow any spark tutorial.
+
+If you need to rebuild your VM to get the new installs or settings or need a
+new clean VM for any reason:
+
+`$ vagrant destroy -f && vagrant up`
+.
