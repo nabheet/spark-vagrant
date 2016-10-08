@@ -92,6 +92,8 @@ SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSiz
 java $SBT_OPTS -jar /usr/local/sbt-launcher/sbt-launch.jar "$@"
 EOF
     chmod -v 755 /usr/bin/sbt
+    echo "Downloading sbt dependencies - this may take a while ... be patient ..."
+    sbt
     echo "Setting environment variables"
     echo "export PATH=$PATH:/usr/local/scala/scala-${scala_version}/bin:/usr/local/spark/spark-${spark_version}-bin-hadoop${hadoop_version}/bin" >> /home/vagrant/.bashrc
   SHELL
