@@ -89,7 +89,7 @@ Vagrant.configure("2") do |config|
     cat > /usr/bin/sbt << EOF
 #!/bin/bash
 SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
-java $SBT_OPTS -jar /usr/local/sbt-launcher/sbt-launch.jar "$@"
+java $SBT_OPTS -jar /usr/local/sbt-launcher/sbt-launch.jar "\\$@"
 EOF
     chmod -v 755 /usr/bin/sbt
     echo "Downloading sbt dependencies - this may take a while ... be patient ..."
