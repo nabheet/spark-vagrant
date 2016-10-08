@@ -12,3 +12,5 @@ commands.
 `$ cd spark-vagrant`
 
 `$ vagrant up`
+
+`$ vagrant ssh`
