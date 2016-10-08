@@ -15,8 +15,11 @@ commands.
 
 `$ vagrant ssh`
 
-Now you are in the `/vagrant` directory inside the VM and you can follow any
-spark tutorial. Please keep in mind that the `/vagrant` directory inside the VM
-is mapped to the `spark-vagrant` directory on your computer/host.
+Now you are in the `/vagrant` directory inside the VM. Please keep in mind that
+the `/vagrant` directory inside the VM is mapped to the `spark-vagrant`
+directory on your computer/host. So all files on your host directory will be
+accessible in this directory. This is an easy way to access/transfer files
+between the host and the VM.
 
-You can now start the `spark-shell` or execute `scalac` or `sbt`.
+You can now start the `spark-shell` or execute `scalac` or `sbt` and you can
+follow any spark tutorial.
