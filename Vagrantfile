@@ -75,10 +75,10 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     scala_version="2.11.8"
-    spark_version="2.0.0"
+    spark_version="2.0.1"
     hadoop_version="2.7"
     sbt_launch_version="0.13.12"
-    wget "http://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.tgz" "http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.7.tgz" "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.12/sbt-launch.jar"
+    wget "http://downloads.lightbend.com/scala/${scala_version}/scala-${scala_version}.tgz" "http://d3kbcqa49mib13.cloudfront.net/spark-${spark_version}-bin-hadoop${hadoop_version}.tgz" "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/${sbt_launch_version}/sbt-launch.jar"
     yum install -y java
     tar xvf scala-${scala_version}.tgz && rm scala-${scala_version}.tgz
     tar xvf spark-${spark_version}-bin-hadoop${hadoop_version}.tgz && rm spark-${spark_version}-bin-hadoop${hadoop_version}.tgz
